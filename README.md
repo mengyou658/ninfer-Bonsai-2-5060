@@ -20,8 +20,17 @@
 | 打包器 | [shensanshu/ninfer-ada-ternary](https://www.modelscope.cn/models/shensanshu/ninfer-ada-ternary) 的 `tools/pack.py` |
 | 模板制品 | 任意 `weights_id=groupwise-int` 的 `qwen3.8-27b` `.ninfer`（借 vision / MTP / frontend） |
 | 输出制品 | **`Bonsai-2-27B-PQ2_0-CRACK.ninfer`**（约 7.8 GiB；文本 6.70 GiB + MTP/vision 借用） |
+| 成品下载 | [mengyou6688/Bonsai-2-27B-PQ2_0-CRACK-NInfer](https://www.modelscope.cn/models/mengyou6688/Bonsai-2-27B-PQ2_0-CRACK-NInfer)（ModelScope） |
 
-打包命令见 `scripts/pack-ternary.sh`。成品可放到 ModelScope（自行上传，本仓仅文档）。
+打包命令见 `scripts/pack-ternary.sh`。也可直接拉成品：
+
+```bash
+# 需已登录 modelscope / 安装 ms CLI
+ms download mengyou6688/Bonsai-2-27B-PQ2_0-CRACK-NInfer \
+  --local_dir artifacts
+# 或放到本机默认路径：
+#   /f/Bonsai-2-27B-PQ2_0-CRACK.ninfer
+```
 
 制品自检：
 
@@ -37,7 +46,7 @@ formats: PQ2_0_G128×322, BF16, Q4G64_F16S, …
 ## 省流说明
 
 1. `bash scripts/build.sh`（约数分钟～十分钟）→ 出现 `build/apps/ninfer-serve`
-2. 放入制品：`artifacts/Bonsai-2-27B-PQ2_0-CRACK.ninfer`（或软链到 `/f/...`）
+2. 放入制品：从 [ModelScope](https://www.modelscope.cn/models/mengyou6688/Bonsai-2-27B-PQ2_0-CRACK-NInfer) 下载到 `artifacts/`（或 `/f/Bonsai-2-27B-PQ2_0-CRACK.ninfer`）
 3. `bash start-server.sh` 启动服务（`127.0.0.1:8080`）
 4. `bash chat.sh` 多轮聊天验证
 5. 再接 opencode / Claude Code 等（见 `接入指南.md`）
@@ -105,6 +114,7 @@ ninfer-Bonsai-2-5060/          ← 本 Git 仓库（脚本与补丁）
   build/apps/ninfer-serve
 /f/Bonsai-2-27B-PQ2_0-CRACK.gguf
 /f/Bonsai-2-27B-PQ2_0-CRACK.ninfer   ★ 运行制品
+  （也可从 ModelScope mengyou6688/Bonsai-2-27B-PQ2_0-CRACK-NInfer 下载）
 ```
 
 ---
