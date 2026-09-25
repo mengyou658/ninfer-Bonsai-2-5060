@@ -9,8 +9,26 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-REPO="${REPO:-${NINFER_REPO:-$ROOT/repo}}"
-PACKER="${PACKER:-$ROOT/packer}"
+if [[ -z "${REPO:-${NINFER_REPO:-}}" ]]; then
+  if [[ -d "$ROOT/repo/.git" || -f "$ROOT/repo/tools/artifact/container.py" ]]; then
+    REPO="$ROOT/repo"
+  elif [[ -d "$ROOT/../repo/.git" || -f "$ROOT/../repo/tools/artifact/container.py" ]]; then
+    REPO="$(cd "$ROOT/../repo" && pwd)"
+  else
+    REPO="$ROOT/repo"
+  fi
+else
+  REPO="${REPO:-$NINFER_REPO}"
+fi
+if [[ -z "${PACKER:-}" ]]; then
+  if [[ -f "$ROOT/packer/tools/pack.py" ]]; then
+    PACKER="$ROOT/packer"
+  elif [[ -f "$ROOT/../packer/tools/pack.py" ]]; then
+    PACKER="$(cd "$ROOT/../packer" && pwd)"
+  else
+    PACKER="$ROOT/packer"
+  fi
+fi
 GGUF="${GGUF:-/f/Bonsai-2-27B-PQ2_0-CRACK.gguf}"
 TEMPLATE="${TEMPLATE:-/f/qwen3_8_27b_minq4.ninfer}"
 OUT="${OUT:-/f/Bonsai-2-27B-PQ2_0-CRACK.ninfer}"

@@ -23,4 +23,4 @@ fi
 export PATH=/usr/local/cuda/bin:${PATH:-}
 exec "$EXE" "$ARTIFACT" \
   --corpus "$ROOT/eval/ppl_sample.txt" \
-  --max-context 32768 --kv-dtype fp8
+  --context 32768 --kv-dtype fp8

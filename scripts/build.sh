@@ -3,8 +3,26 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-REPO="${REPO:-$ROOT/repo}"
-BUILD="${BUILD:-$ROOT/build}"
+# Deployed layout: git clone under /f/ninfer-Bonsai-2-5060/ninfer-Bonsai-2-5060,
+# with repo/ + build/ as siblings under /f/ninfer-Bonsai-2-5060/.
+if [[ -z "${REPO:-}" ]]; then
+  if [[ -d "$ROOT/repo/.git" ]]; then
+    REPO="$ROOT/repo"
+  elif [[ -d "$ROOT/../repo/.git" ]]; then
+    REPO="$(cd "$ROOT/../repo" && pwd)"
+  else
+    REPO="$ROOT/repo"
+  fi
+fi
+if [[ -z "${BUILD:-}" ]]; then
+  if [[ -d "$ROOT/build/apps" ]]; then
+    BUILD="$ROOT/build"
+  elif [[ -d "$ROOT/../build/apps" ]]; then
+    BUILD="$(cd "$ROOT/../build" && pwd)"
+  else
+    BUILD="$ROOT/build"
+  fi
+fi
 PATCH="$ROOT/patches/rtx5060ti-sm120a.patch"
 
 export PATH=/usr/local/cuda/bin:${PATH:-}
