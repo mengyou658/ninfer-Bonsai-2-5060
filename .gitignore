@@ -1,0 +1,15 @@
+/.workbuddy
+/artifacts
+/build
+/models
+/repo
+/packer
+/profiles
+/logs
+/ms-cache
+*.ninfer
+*.gguf
+*.log
+/.idea
+__pycache__/
+.DS_Store

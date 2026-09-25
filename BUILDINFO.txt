@@ -1,0 +1,12 @@
+project:   mengyou658/ninfer-Bonsai-2-5060
+engine:    CraneBW/ninfer-ternary-bonsai-ada + patches/rtx5060ti-sm120a.patch
+gguf:      nuottroisaoduoc/Bonsai-2-27B-Ternary-CRACK-GGUF (PQ2_0 CRACK)
+packer:    modelscope shensanshu/ninfer-ada-ternary (tools/pack.py)
+artifact:  Bonsai-2-27B-PQ2_0-CRACK.ninfer (7.736 GiB; text 6.696 GiB; MTP on → 7.12 GiB VRAM)
+
+host:      Ubuntu 24.04.3 LTS @ /f/ninfer-Bonsai-2-5060
+gpu:       NVIDIA GeForce RTX 5060 Ti 16GB, driver 595.99.02, compute_cap 12.0, 36 SMs
+arch:      sm_120a + NINFER_SM120 (kTargetSmCount=36)
+toolchain: CUDA 13.0.88, g++ 13.3.0, cmake 3.28.3, ninja 1.11.1
+ffmpeg:    system libavformat 60.16.100 (media enabled)
+built:     2026-09-25 — BUILD OK 352/352; pack check+build OK; engine ready smoke OK
